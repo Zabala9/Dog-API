@@ -13,7 +13,7 @@ function Gallery(){
     const [loadCountBreeds, setLoadCountBreeds] = useState(10);
     const [isLoading, setIsLoading] = useState(true);
 
-    // console.log(selectedBreeds, 'selected');
+    console.log(selectedBreeds, 'selected');
 
     useEffect(() => {
         axios.get('https://dog.ceo/api/breeds/list/all')
@@ -46,9 +46,10 @@ function Gallery(){
         setLoadCountBreeds(prev => prev+10);
     };
 
-    const breedChange = () => {
-        
-        // setSelectedBreeds();
+    const breedSelect = (breed) => {
+        if(!selectedBreeds.includes(breed)){
+            setSelectedBreeds(prev => [...prev, breed] )
+        }
         setLoadCountImages(10);
     };
 
@@ -63,10 +64,10 @@ function Gallery(){
                         <label id="label-breeds-selected">Breeds selected: </label>
                         <div>
                             { selectedBreeds.length > 0 ? 
-                                selectedBreeds.map(breed => {
+                                selectedBreeds.map(breed => (
                                     <label id="label-breed-selected">
                                         {breed}
-                                    </label>})
+                                    </label>))
                                 : 
                                 <label id="label-none-selected">None</label>
                             }
@@ -77,7 +78,9 @@ function Gallery(){
                         <div>
                             {breeds.map((breed, index) => (
                                 index < loadCountBreeds ? 
-                                    <button id="button-breed">{breed}</button>
+                                    <button id="button-breed" onClick={() => breedSelect(breed)}>
+                                        {breed}
+                                    </button>
                                     :
                                     undefined
                             ))}

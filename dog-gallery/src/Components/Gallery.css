@@ -26,6 +26,17 @@
 
 .selected-breeds-container > div{
     margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: green;
+    max-width: 80vw;
+}
+
+#label-breed-selected{
+    color: white;
+    font-size: 16px;
+    margin: 2px;
 }
 
 #label-none-selected{
