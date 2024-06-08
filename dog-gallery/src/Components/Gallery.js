@@ -55,25 +55,35 @@ function Gallery(){
     return (
         <div className="gallery">
             { isLoading ? 
-                <label>Loading breeds...</label>
+                <label id="loading-label">Loading breeds...</label>
              : 
                 <>
+                    <label id="label-welcome">Welcome!</label>
                     <div className="selected-breeds-container">
                         <label id="label-breeds-selected">Breeds selected: </label>
-                        { selectedBreeds.map(breed => {
-                            <label>
-                                {breed}
-                            </label>
-                        })}
+                        <div>
+                            { selectedBreeds.length > 0 ? 
+                                selectedBreeds.map(breed => {
+                                    <label id="label-breed-selected">
+                                        {breed}
+                                    </label>})
+                                : 
+                                <label id="label-none-selected">None</label>
+                            }
+                        </div>
                     </div>
                     <div className="breeds-options-container">
-                        {breeds.map((breed, index) => (
-                            index < loadCountBreeds ? <button>{breed}</button>
-                                :
-                                undefined
-                        ))}
+                        <label id="label-select-breed">Select the breeds you want to see!</label>
+                        <div>
+                            {breeds.map((breed, index) => (
+                                index < loadCountBreeds ? 
+                                    <button id="button-breed">{breed}</button>
+                                    :
+                                    undefined
+                            ))}
+                        </div>
                         <button id="button-load-breeds" onClick={loadMoreBreedsOptions}>
-                            Load more breeds
+                            Load more breeds!
                         </button>
                     </div>
                 </>

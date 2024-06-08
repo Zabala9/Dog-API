@@ -1,4 +1,73 @@
-#select-breed{
-    height: 100px;
-    width: 200px;
+.gallery{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+#label-welcome{
+    margin-bottom: 10px;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#label-breeds-selected, #label-select-breed{
+    color: white;
+    font-size: 18px;
+}
+
+.selected-breeds-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selected-breeds-container > div{
+    margin-top: 10px;
+}
+
+#label-none-selected{
+    color: white;
+    text-decoration: underline;
+}
+
+.breeds-options-container{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.breeds-options-container > div {
+    max-width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    padding: 6px 3px;
+    /* background-color: white; */
+}
+
+#button-breed{
+    margin: 2px;
+    font-size: 18px;
+    padding: 2px 4px;
+    background-color: cornsilk;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+#button-breed:hover, #button-load-breeds:hover{
+    cursor: pointer;
+    background-color: rgb(206, 206, 206);
+}
+
+#button-load-breeds{
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 2px 6px;
 }
