@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import './Gallery.css'
 
 function Gallery(){
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [breeds, setBreads] = useState([]);
     const [images, setImages] = useState([]);
     const [displayImages, setDisplayImages] = useState([]);
@@ -47,9 +47,13 @@ function Gallery(){
     };
 
     const breedSelect = (breed) => {
-        if(!selectedBreeds.includes(breed)){
-            setSelectedBreeds(prev => [...prev, breed] )
-        }
+        setSelectedBreeds(prev => {
+            if(prev.includes(breed)){
+                return prev.filter(b => b !== breed);
+            } else {
+                return [...prev, breed]
+            }
+        })
         setLoadCountImages(10);
     };
 
@@ -78,7 +82,7 @@ function Gallery(){
                         <div>
                             {breeds.map((breed, index) => (
                                 index < loadCountBreeds ? 
-                                    <button id="button-breed" onClick={() => breedSelect(breed)}>
+                                    <button key={breed} id="button-breed" onClick={() => breedSelect(breed)}>
                                         {breed}
                                     </button>
                                     :
