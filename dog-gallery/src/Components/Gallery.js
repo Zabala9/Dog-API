@@ -13,7 +13,7 @@ function Gallery(){
     const [loadCountBreeds, setLoadCountBreeds] = useState(10);
     const [isLoading, setIsLoading] = useState(true);
 
-    console.log(selectedBreeds, 'selected');
+    // console.log(displayImages, 'img');
 
     useEffect(() => {
         axios.get('https://dog.ceo/api/breeds/list/all')
@@ -31,7 +31,7 @@ function Gallery(){
         breedList.forEach(breed => {
             axios.get(`https://dog.ceo/api/breed/${breed}/images`)
                 .then(response => {
-                    const allImages = response.data.message.slice(0, 10).map(imgUrl => ({
+                    const allImages = response.data.message.slice(0, 2).map(imgUrl => ({
                         breed,
                         imgUrl
                     }));
@@ -88,6 +88,13 @@ function Gallery(){
                         <button id="button-load-breeds" onClick={loadMoreBreedsOptions}>
                             Load more breeds!
                         </button>
+                    </div>
+                    <div className="container-images">
+                        { displayImages.map(image => (
+                            image.map(img => (
+                                <img alt="" src={img.imgUrl} id="img-breed" />
+                            ))
+                        ))}
                     </div>
                 </>
             }
