@@ -82,7 +82,9 @@ function Gallery(){
                         <div>
                             {breeds.map((breed, index) => (
                                 index < loadCountBreeds ? 
-                                    <button key={breed} id="button-breed" onClick={() => breedSelect(breed)}>
+                                    <button key={breed} id="button-breed" onClick={() => breedSelect(breed)}
+                                        style={{backgroundColor: selectedBreeds.includes(breed) ? '#4CAF50' : 'cornsilk'}}
+                                    >
                                         {breed}
                                     </button>
                                     :
