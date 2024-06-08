@@ -42,6 +42,10 @@ function Gallery(){
         });
     };
 
+    const loadMoreBreedsOptions = () => {
+        setLoadCountBreeds(prev => prev+10);
+    };
+
     const breedChange = () => {
         
         // setSelectedBreeds();
@@ -68,7 +72,7 @@ function Gallery(){
                                 :
                                 undefined
                         ))}
-                        <button id="button-load-breeds">
+                        <button id="button-load-breeds" onClick={loadMoreBreedsOptions}>
                             Load more breeds
                         </button>
                     </div>
