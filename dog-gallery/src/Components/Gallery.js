@@ -10,6 +10,7 @@ function Gallery(){
     const [displayImages, setDisplayImages] = useState([]);
     const [selectedBreeds, setSelectedBreeds] = useState([]);
     const [loadCountImages, setLoadCountImages] = useState(10);
+    const [loadCountBreeds, setLoadCountBreeds] = useState(10);
     const [isLoading, setIsLoading] = useState(true);
 
     // console.log(selectedBreeds, 'selected');
@@ -41,9 +42,9 @@ function Gallery(){
         });
     };
 
-    const breedChange = (event) => {
-        const selectedOptions = Array.from(event.target.selectedOptions, option => option.value);
-        setSelectedBreeds(selectedOptions);
+    const breedChange = () => {
+        
+        // setSelectedBreeds();
         setLoadCountImages(10);
     };
 
@@ -61,13 +62,15 @@ function Gallery(){
                             </label>
                         })}
                     </div>
-                    {breeds.map(breed => (
-                        <button>
-                            {breed}
+                    <div className="breeds-options-container">
+                        {breeds.map((breed, index) => (
+                            index < loadCountBreeds ? <button>{breed}</button>
+                                :
+                                undefined
+                        ))}
+                        <button id="button-load-breeds">
+                            Load more breeds
                         </button>
-                    ))}
-                    <div>
-
                     </div>
                 </>
             }
