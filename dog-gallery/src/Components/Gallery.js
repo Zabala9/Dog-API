@@ -9,11 +9,10 @@ function Gallery(){
     const [images, setImages] = useState([]);
     const [displayImages, setDisplayImages] = useState([]);
     const [selectedBreeds, setSelectedBreeds] = useState([]);
-    const [loadCount, setLoadCount] = useState(10);
+    const [loadCountImages, setLoadCountImages] = useState(10);
     const [isLoading, setIsLoading] = useState(true);
 
-    console.log(breeds, 'breeds');
-    console.log(images, 'images');
+    // console.log(selectedBreeds, 'selected');
 
     useEffect(() => {
         axios.get('https://dog.ceo/api/breeds/list/all')
@@ -45,7 +44,7 @@ function Gallery(){
     const breedChange = (event) => {
         const selectedOptions = Array.from(event.target.selectedOptions, option => option.value);
         setSelectedBreeds(selectedOptions);
-        setLoadCount(10);
+        setLoadCountImages(10);
     };
 
     return (
@@ -54,13 +53,19 @@ function Gallery(){
                 <label>Loading breeds...</label>
              : 
                 <>
-                    <select multiple value={selectedBreeds} onChange={breedChange} id="select-breed">
-                        {breeds.map(breed => (
-                            <option key={breed} value={breed}>
-                                {breed.charAt(0).toUpperCase() + breed.slice(1)}
-                            </option>
-                        ))}
-                    </select>
+                    <div className="selected-breeds-container">
+                        <label id="label-breeds-selected">Breeds selected: </label>
+                        { selectedBreeds.map(breed => {
+                            <label>
+                                {breed}
+                            </label>
+                        })}
+                    </div>
+                    {breeds.map(breed => (
+                        <button>
+                            {breed}
+                        </button>
+                    ))}
                     <div>
 
                     </div>
