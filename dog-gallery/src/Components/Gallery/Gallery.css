@@ -1,0 +1,129 @@
+.gallery{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#label-welcome{
+    margin-bottom: 20px;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#label-breeds-selected, #label-select-breed{
+    color: white;
+    font-size: 18px;
+}
+
+.selected-breeds-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selected-breeds-container > div{
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-style: italic;
+    max-width: 80vw;
+}
+
+#label-breed-selected{
+    color: white;
+    font-size: 16px;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+#label-none-selected{
+    color: white;
+    text-decoration: underline;
+}
+
+.breeds-options-container{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.breeds-options-container > div {
+    max-width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    padding: 6px 3px;
+    /* background-color: white; */
+}
+
+#button-breed{
+    margin: 2px;
+    font-size: 18px;
+    padding: 2px 4px;
+    background-color: cornsilk;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+#button-breed:hover, #button-load-breeds:hover,
+#button-load-images:hover{
+    cursor: pointer;
+    background-color: rgb(206, 206, 206);
+}
+
+#button-load-breeds, #button-load-images{
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 2px 6px;
+}
+
+.container-images{
+    margin-top: 4%;
+    margin-bottom: 20px;
+    max-width: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.container-images > div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container-images > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#label-breed-name{
+    color: white;
+    font-size: 16px;
+}
+
+#label-images{
+    color: white;
+    font-size: 40px;
+}
+
+#img-breed{
+    margin: 8px;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+#button-load-images{
+    margin-top: 50px;
+}
