@@ -10,7 +10,7 @@ function Gallery(){
     const [images, setImages] = useState([]);
     const [displayImages, setDisplayImages] = useState([]);
     const [selectedBreeds, setSelectedBreeds] = useState([]);
-    const [loadCountImages, setLoadCountImages] = useState(15);
+    const [loadCountImages, setLoadCountImages] = useState(30);
     const [loadCountBreeds, setLoadCountBreeds] = useState(10);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -43,7 +43,6 @@ function Gallery(){
     };
 
     const fetchSpecificBreed = (breed) => {
-        // console.log(breed, 'insi');
         axios.get(`https://dog.ceo/api/breed/${breed}/images`)
             .then(response => {
                 const imagesBreed = response.data.message.map(imgUrl => ({
@@ -51,7 +50,13 @@ function Gallery(){
                     imgUrl
                 }));
                 setImages(prevImages => {
-                    const updatedImages = [...prevImages, ...imagesBreed];
+                    // creating set of image URLS to ensure uniqueness
+                    const existingImageUrls = new Set(prevImages.map(img => img.imgUrl));
+
+                    // filtering duplicates by checking if the URL is already in the set
+                    const newUniqueImages = imagesBreed.filter(img => !existingImageUrls.has(img.imgUrl));
+
+                    const updatedImages = [...prevImages, ...newUniqueImages];
                     setDisplayImages(updatedImages);
                     return updatedImages;
                 });
@@ -141,15 +146,23 @@ function Gallery(){
                         }
                         <div>
                             {
-                            displayImages.map((image, index) => (
-                                index < loadCountImages ? 
-                                    <div>
-                                        <img alt="" src={image.imgUrl} id="img-breed" />
-                                        <label id="label-breed-name">Breed: {image.breed}</label>
-                                    </div>
+                                displayImages.length < loadCountImages ?
+                                    displayImages.map((image) => (
+                                        <div>
+                                            <img alt="" src={image.imgUrl} id="img-breed" />
+                                            <label id="label-breed-name">Breed: {image.breed}</label>
+                                        </div>
+                                    ))
                                 :
-                                undefined
-                            ))
+                                    displayImages.map((image, index) => (
+                                        index < loadCountImages ? 
+                                            <div>
+                                                <img alt="" src={image.imgUrl} id="img-breed" />
+                                                <label id="label-breed-name">Breed: {image.breed}</label>
+                                            </div>
+                                        :
+                                        undefined
+                                    ))
                             }
                         </div>
                         <button id="button-load-images" onClick={loadMoreImages}>
