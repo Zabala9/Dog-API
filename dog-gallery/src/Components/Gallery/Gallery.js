@@ -73,6 +73,7 @@ function Gallery(){
                 const newSelectedBreeds = prev.filter(b => b !== breed);
 
                 if(newSelectedBreeds.length === 0){
+                    setLoadCountImages(15);
                     fetchAllImages(breeds);
                 }
                 return newSelectedBreeds;
@@ -110,7 +111,7 @@ function Gallery(){
                             {breeds.map((breed, index) => (
                                 index < loadCountBreeds ? 
                                     <button key={breed} id="button-breed" onClick={() => breedSelect(breed)}
-                                        style={{backgroundColor: selectedBreeds.includes(breed) ? '#4CAF50' : 'cornsilk'}}
+                                        style={{backgroundColor: selectedBreeds.includes(breed) ? '#4CAF50' : undefined }}
                                     >
                                         {breed}
                                     </button>
