@@ -43,6 +43,7 @@ function Gallery(){
     };
 
     const fetchSpecificBreed = (breed) => {
+        console.log(breed, 'insi');
         axios.get(`https://dog.ceo/api/breed/${breed}/images`)
             .then(response => {
                 const imagesBreed = response.data.message.map(imgUrl => ({
@@ -67,6 +68,7 @@ function Gallery(){
     };
 
     const breedSelect = (breed) => {
+        console.log(breed);
         setSelectedBreeds(prev => {
             if(prev.includes(breed)){
                 setLoadCountImages(80);
@@ -75,6 +77,7 @@ function Gallery(){
                 if(newSelectedBreeds.length === 0){
                     setLoadCountImages(15);
                     fetchAllImages(breeds);
+                    setImages([]);
                 }
                 return newSelectedBreeds;
             } else {
