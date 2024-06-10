@@ -14,8 +14,6 @@ function Gallery(){
     const [loadCountBreeds, setLoadCountBreeds] = useState(10);
     const [isLoading, setIsLoading] = useState(true);
 
-    console.log(displayImages, 'dis');
-
     useEffect(() => {
         axios.get('https://dog.ceo/api/breeds/list/all')
             .then(response => {
@@ -71,13 +69,19 @@ function Gallery(){
     const breedSelect = (breed) => {
         setSelectedBreeds(prev => {
             if(prev.includes(breed)){
-                return prev.filter(b => b !== breed);
+                setLoadCountImages(80);
+                const newSelectedBreeds = prev.filter(b => b !== breed);
+
+                if(newSelectedBreeds.length === 0){
+                    fetchAllImages(breeds);
+                }
+                return newSelectedBreeds;
             } else {
                 fetchSpecificBreed(breed);
+                setLoadCountImages(80);
                 return [...prev, breed]
             }
         })
-        setLoadCountImages(10);
     };
 
     return (
@@ -134,11 +138,7 @@ function Gallery(){
                                     </div>
                                 :
                                 undefined
-                            )) 
-                            // selectedBreeds.length === 0 ?
-                                
-                            //     :
-                            //     <label>test</label>
+                            ))
                             }
                         </div>
                         <button id="button-load-images" onClick={loadMoreImages}>
