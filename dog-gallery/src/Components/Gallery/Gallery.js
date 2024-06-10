@@ -14,6 +14,8 @@ function Gallery(){
     const [loadCountBreeds, setLoadCountBreeds] = useState(10);
     const [isLoading, setIsLoading] = useState(true);
 
+    console.log(displayImages, 'dis');
+
     useEffect(() => {
         axios.get('https://dog.ceo/api/breeds/list/all')
             .then(response => {
@@ -27,18 +29,35 @@ function Gallery(){
     }, []);
 
     const fetchAllImages = (breedList) => {
+        let allImages = [];
         breedList.forEach(breed => {
             axios.get(`https://dog.ceo/api/breed/${breed}/images`)
                 .then(response => {
-                    const allImages = response.data.message.slice(0, 2).map(imgUrl => ({
+                    const allBreedImages = response.data.message.slice(0, 2).map(imgUrl => ({
                         breed,
                         imgUrl
                     }));
-                    setImages(prevImages => [...prevImages, ...allImages]);
-                    setDisplayImages(prevImages => [...prevImages, allImages]);
+                    allImages = [...allImages, ...allBreedImages];
+                    setDisplayImages(allImages);
                 })
                 .catch(error => console.error(`Error fetching images for breed ${breed}: `, error));
         });
+    };
+
+    const fetchSpecificBreed = (breed) => {
+        axios.get(`https://dog.ceo/api/breed/${breed}/images`)
+            .then(response => {
+                const imagesBreed = response.data.message.map(imgUrl => ({
+                    breed,
+                    imgUrl
+                }));
+                setImages(prevImages => {
+                    const updatedImages = [...prevImages, ...imagesBreed];
+                    setDisplayImages(updatedImages);
+                    return updatedImages;
+                });
+            })
+            .catch(error => console.error(`Error fetching images for breed ${breed}: `, error));
     };
 
     const loadMoreBreedsOptions = () => {
@@ -54,6 +73,7 @@ function Gallery(){
             if(prev.includes(breed)){
                 return prev.filter(b => b !== breed);
             } else {
+                fetchSpecificBreed(breed);
                 return [...prev, breed]
             }
         })
@@ -105,17 +125,21 @@ function Gallery(){
                             <label id="label-images">All breeds:</label>
                         }
                         <div>
-                            { displayImages.map((image, index) => (
+                            {
+                            displayImages.map((image, index) => (
                                 index < loadCountImages ? 
-                                    image.map(img => (
-                                        <div>
-                                            <img alt="" src={img.imgUrl} id="img-breed" />
-                                            <label id="label-breed-name">Breed: {img.breed}</label>
-                                        </div>
-                                    ))
+                                    <div>
+                                        <img alt="" src={image.imgUrl} id="img-breed" />
+                                        <label id="label-breed-name">Breed: {image.breed}</label>
+                                    </div>
                                 :
                                 undefined
-                            ))}
+                            )) 
+                            // selectedBreeds.length === 0 ?
+                                
+                            //     :
+                            //     <label>test</label>
+                            }
                         </div>
                         <button id="button-load-images" onClick={loadMoreImages}>
                             Load more images!
