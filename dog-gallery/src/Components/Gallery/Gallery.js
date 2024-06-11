@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './Gallery.css'
 
 function Gallery(){
+    const navigate = useNavigate();
     const location = useLocation();
     const { name } = location.state || {};
     const [breeds, setBreads] = useState([]);
@@ -100,13 +101,20 @@ function Gallery(){
         })
     };
 
+    const goBack = () => {
+        navigate('/');
+    };
+
     return (
         <div className="gallery">
             { isLoading ? 
                 <label id="loading-label">Loading breeds...</label>
              : 
                 <>
-                    <label id="label-welcome">Welcome {name}!</label>
+                    {/* <div className="container-welcome"> */}
+                        <button id="button-go-back" onClick={goBack}>Go back</button>
+                        <label id="label-welcome">Welcome {name}!</label>
+                    {/* </div> */}
                     <div className="selected-breeds-container">
                         <label id="label-breeds-selected">Breeds selected: </label>
                         <div>
