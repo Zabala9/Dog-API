@@ -27,7 +27,9 @@ function Main() {
                 value={name}
                 onChange={handleChangeName}
             />
-            <button id='button-continue' onClick={handleContinue}>
+            <button id='button-continue' onClick={handleContinue}
+                disabled={!name}
+            >
                 Continue
             </button>
         </div>
